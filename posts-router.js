@@ -5,7 +5,9 @@ const db = require('./data/db.js');
 router.get('/', async(req, res) => {
     db.find()
     .then(posts => {
-        res.status(200).json(posts);
+        res.status(200).json({
+            messageOfTheDay: process.env.MOTD,
+            posts});
     })
     .catch(err=>{
         res.status(500).json({error: "The posts information could not be retrieved."})
